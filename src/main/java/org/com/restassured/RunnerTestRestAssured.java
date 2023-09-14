@@ -19,6 +19,6 @@ public class RunnerTestRestAssured {
     }
 
     public static void main(String[] args) {
-        System.out.println("Units tests created!");
+        System.out.println("Learning about JUnit and RestAssured!");
     }
 }
