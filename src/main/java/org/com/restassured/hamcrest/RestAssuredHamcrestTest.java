@@ -8,19 +8,17 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.com.restassured.RestAssuredRunnerTest.HELLO_URL;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
 public class RestAssuredHamcrestTest {
-    private final GetEnvironmentUtils getEnvironmentUtils = new GetEnvironmentUtils();
-    public final String uriApi = getEnvironmentUtils.getApplicationProperties("API_URI");
-
     @Test
     public void validateBodyResponse() {
         given()
                 .when()
-                    .get(uriApi)
+                    .get(HELLO_URL)
                 .then()
                     .statusCode(200)
                     .body(is("Ola Mundo!"))

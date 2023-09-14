@@ -11,13 +11,14 @@ import org.junit.Test;
 import static io.restassured.RestAssured.*;
 
 public class RestAssuredRunnerTest {
-    private final GetEnvironmentUtils getEnvironmentUtils = new GetEnvironmentUtils();
-    public final String uriApi = getEnvironmentUtils.getApplicationProperties("API_URI");
+    private static final GetEnvironmentUtils getEnvironmentUtils = new GetEnvironmentUtils();
+    public static final String HELLO_URL = getEnvironmentUtils.getApplicationProperties("HELLO_URL");
+
     @Test
     public void testStatusCodeResponse() {
 
 
-        Response response = RestAssured.request(Method.GET, uriApi);
+        Response response = RestAssured.request(Method.GET, HELLO_URL);
         System.out.println("RESPONSE STATUS CODE: " + response.getStatusCode());
 
         Assert.assertEquals(200, response.statusCode());
@@ -25,7 +26,7 @@ public class RestAssuredRunnerTest {
 
     @Test
     public void testContentResponseBody() {
-        Response response = RestAssured.request(Method.GET, uriApi);
+        Response response = RestAssured.request(Method.GET, HELLO_URL);
 
         System.out.println("RESPONSE BODY: " + response.getBody().asString());
 
@@ -36,7 +37,7 @@ public class RestAssuredRunnerTest {
     public void testGivenSimpleMethod() {
         given()
                 .when()
-                .get(uriApi)
+                .get(HELLO_URL)
                 .then()
                 .statusCode(200)
                 .log()
