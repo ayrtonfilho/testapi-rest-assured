@@ -12,7 +12,13 @@ public class GetEnvironmentUtils {
                     getClass().getClassLoader().getResourceAsStream("application.properties");
             properties.load(inputStream);
 
-            return  properties.getProperty(property);
+            String value = properties.getProperty(property);
+
+            if (value == null || value.trim().isEmpty()) {
+                throw new IOException("Property not found: " + property);
+            }
+
+            return value;
         } catch (IOException e) {
             e.printStackTrace();
             return "";
