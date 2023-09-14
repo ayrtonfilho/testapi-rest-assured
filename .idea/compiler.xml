@@ -9,5 +9,8 @@
         <module name="testapi-restassured" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="testapi-restassured" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>
