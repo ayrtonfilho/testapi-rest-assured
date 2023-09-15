@@ -1,6 +1,5 @@
 package org.com.restassured.hamcrest;
 
-import org.com.restassured.utils.GetEnvironmentUtils;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Test;
