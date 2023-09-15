@@ -1,6 +1,9 @@
 package org.com.restassured.hamcrest;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.com.restassured.hamcrest.JsonApiRestAssuredHamcrestTest.USERS_URL;
 import static org.hamcrest.Matchers.*;
@@ -40,5 +43,20 @@ public class AdvancedVerificationMethodTest {
                 .body("salary.findAll{it != null}.sum()", is(closeTo(3734.5678f, 0.001)))
                 .body("salary.findAll{it != null}.sum()", allOf(greaterThan(3000d), lessThan(5000d)))
                 .log().all();
+    }
+
+    @Test
+    public void shouldJoinJsonPathWithJavaTest() {
+        ArrayList<String> names =
+                given()
+                    .when()
+                    .get(USERS_URL)
+                    .then()
+                    .statusCode(200)
+                    .extract().path("name.findAll({it.startsWith('Maria')})");
+
+        Assert.assertEquals(1, names.size());
+        Assert.assertEquals(names.get(0), equalToIgnoringCase("Maria Joaquina"));
+        Assert.assertEquals(names.get(0).toUpperCase(), "maria joaquina".toUpperCase());
     }
 }
