@@ -43,5 +43,6 @@ public class WorkWithXmltoApiTest {
                     .statusCode(200)
                     .body("users.user.size()", is(3))
                 .body("user.user.findAll{it.age.toInteger() <= 25}.size()", is(2));
+
     }
 }
