@@ -1,21 +1,31 @@
 package org.com.restassured.hamcrest;
 
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
+import org.com.restassured.utils.RestAssuredConfigPath;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.com.restassured.hamcrest.JsonApiRestAssuredHamcrestTest.USERS_URL;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
 public class AdvancedVerificationMethodTest {
+    @BeforeClass
+    public static void configRestAssured() {
+        RestAssuredConfigPath restAssuredConfigPath = new RestAssuredConfigPath("API_URL", "");
+        baseURI = restAssuredConfigPath.getBaseUrl();
+        basePath = restAssuredConfigPath.getBasePath();
+    }
 
     @Test
     public void getAllCollectionUsersTest() {
+
         given()
                 .when()
-                    .get(USERS_URL)
+                    .get("users")
                 .then()
                     .statusCode(200)
                     .body("findAll{it.age <= 25 && it.age > 20}.name", hasItem("Maria Joaquina")) // usuários que tenha idade menor ou igual a 25 e maior que 20 e com nome "Maria Joaquina"
@@ -30,9 +40,10 @@ public class AdvancedVerificationMethodTest {
 
     @Test
     public void getAllCollectionUsersQuantityTest() {
-        given()
+
+       given()
                 .when()
-                .get(USERS_URL)
+                .get("users")
                 .then()
                 .statusCode(200)
                 .body("$", hasSize(3)) //garantia de que a coleção terá 3 registros brutos
@@ -49,11 +60,11 @@ public class AdvancedVerificationMethodTest {
     public void shouldJoinJsonPathWithJavaTest() {
         ArrayList<String> names =
                 given()
-                    .when()
-                    .get(USERS_URL)
-                    .then()
-                    .statusCode(200)
-                    .extract().path("name.findAll({it.startsWith('Maria')})");
+                        .when()
+                        .get("users")
+                        .then()
+                        .statusCode(200)
+                        .extract().path("name.findAll({it.startsWith('Maria')})");
 
         Assert.assertEquals(1, names.size());
         Assert.assertEquals(names.get(0), equalToIgnoringCase("Maria Joaquina"));

@@ -4,19 +4,26 @@ import static io.restassured.RestAssured.*;
 
 import org.com.restassured.utils.GetEnvironmentUtils;
 import static org.hamcrest.Matchers.*;
+
+import org.com.restassured.utils.RestAssuredConfigPath;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 public class JsonApiRestAssuredHamcrestTest {
-    private static final GetEnvironmentUtils getEnvironmentUtils = new GetEnvironmentUtils();
-    public static final String USERS_URL = getEnvironmentUtils.getApplicationProperties("USERS_URL");
+    @BeforeClass
+    public static void configRestAssured() {
+        RestAssuredConfigPath restAssuredConfigPath = new RestAssuredConfigPath("API_URL", "");
+        baseURI = restAssuredConfigPath.getBaseUrl();
+        basePath = restAssuredConfigPath.getBasePath();
+    }
     @Test
     public void firstLevelVerification() {
 
         given()
                 .when()
-                    .get(USERS_URL + 1)
+                    .get("users/1")
                 .then()
                     .statusCode(200)
                     .body("id", is(1))
@@ -29,7 +36,7 @@ public class JsonApiRestAssuredHamcrestTest {
     public void secondLevelVerification() {
         given()
                 .when()
-                    .get(USERS_URL + 2)
+                    .get("users/2")
                 .then()
                     .statusCode(200)
                     .log().all()
@@ -43,7 +50,7 @@ public class JsonApiRestAssuredHamcrestTest {
     public void thirdLevelListVerification() {
         given()
                 .when()
-                    .get(USERS_URL + 3)
+                    .get("users/3")
                 .then()
                     .statusCode(200)
                     .log().all()
@@ -58,7 +65,7 @@ public class JsonApiRestAssuredHamcrestTest {
     public void fourthLevelListVerification() {
         given()
                 .when()
-                    .get(USERS_URL + 4)
+                    .get("users/4")
                 .then()
                     .statusCode(404)
                     .log().all()
@@ -69,7 +76,7 @@ public class JsonApiRestAssuredHamcrestTest {
     public void fifthLevelListVerification() {
         given()
                 .when()
-                    .get(USERS_URL)
+                    .get("users/")
                 .then()
                     .statusCode(200)
                     .log().all()
