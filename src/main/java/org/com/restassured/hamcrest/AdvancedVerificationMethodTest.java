@@ -43,17 +43,17 @@ public class AdvancedVerificationMethodTest {
 
        given()
                 .when()
-                .get("users")
+                    .get("users")
                 .then()
-                .statusCode(200)
-                .body("$", hasSize(3)) //garantia de que a coleção terá 3 registros brutos
-                .body("age.findAll{it <= 25}.size()", is(2))
-                .body("age.findAll{it <= 25 && it > 20}.size()", is(1))
-                .body("id.max()", is(3))
-                .body("salary.min()", is(1234.5678f))
-                .body("salary.findAll{it != null}.sum()", is(closeTo(3734.5678f, 0.001)))
-                .body("salary.findAll{it != null}.sum()", allOf(greaterThan(3000d), lessThan(5000d)))
-                .log().all();
+                    .statusCode(200)
+                    .body("$", hasSize(3)) //garantia de que a coleção terá 3 registros brutos
+                    .body("age.findAll{it <= 25}.size()", is(2))
+                    .body("age.findAll{it <= 25 && it > 20}.size()", is(1))
+                    .body("id.max()", is(3))
+                    .body("salary.min()", is(1234.5678f))
+                    .body("salary.findAll{it != null}.sum()", is(closeTo(3734.5678f, 0.001)))
+                    .body("salary.findAll{it != null}.sum()", allOf(greaterThan(3000d), lessThan(5000d)))
+                    .log().all();
     }
 
     @Test
