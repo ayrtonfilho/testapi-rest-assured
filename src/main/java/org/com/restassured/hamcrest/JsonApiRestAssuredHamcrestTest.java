@@ -2,7 +2,6 @@ package org.com.restassured.hamcrest;
 
 import static io.restassured.RestAssured.*;
 
-import org.com.restassured.utils.GetEnvironmentUtils;
 import static org.hamcrest.Matchers.*;
 
 import org.com.restassured.utils.RestAssuredConfigPath;

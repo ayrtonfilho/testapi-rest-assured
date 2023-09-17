@@ -94,7 +94,7 @@ public class WorkWithXmltoApiTest {
                     .body(hasXPath("count(/users/user)", is("3")))
                     .body(hasXPath("/users/user[@id = '1']"))
                     .body(hasXPath("//user[@id = '2']"))
-                    //.body(hasXPath("/users/user/name"), is("João da Silva"))
+                    .body(hasXPath("/users/user/name"), is("João da Silva"))
                     .log().all();
     }
 }
