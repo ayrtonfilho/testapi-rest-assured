@@ -1,6 +1,7 @@
 package org.com.restassured.hamcrest;
 
 import io.restassured.RestAssured;
+import io.restassured.path.xml.element.Node;
 import io.restassured.specification.RequestSpecification;
 import org.com.restassured.utils.RestAssuredConfigPath;
 import org.junit.Assert;
@@ -67,7 +68,7 @@ public class AdvancedVerificationMethodTest {
                         .extract().path("name.findAll({it.startsWith('Maria')})");
 
         Assert.assertEquals(1, names.size());
-        Assert.assertEquals(names.get(0), equalToIgnoringCase("Maria Joaquina"));
-        Assert.assertEquals(names.get(0).toUpperCase(), "maria joaquina".toUpperCase());
+        Assert.assertEquals(names.get(0).toString(), equalToIgnoringCase("Maria Joaquina"));
+        Assert.assertEquals(names.get(0).toString().toUpperCase(), "maria joaquina".toUpperCase());
     }
 }
