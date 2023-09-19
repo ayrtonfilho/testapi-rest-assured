@@ -4,11 +4,9 @@ import static io.restassured.RestAssured.*;
 
 import static org.hamcrest.Matchers.*;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
-import io.restassured.specification.RequestSpecification;
 import org.com.restassured.utils.RestAssuredConfigPath;
 import org.junit.BeforeClass;
 import org.junit.Test;
