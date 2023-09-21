@@ -41,6 +41,7 @@ public class JsonApiRestAssuredHamcrestTest {
                     .body("age", greaterThan(18));
     }
 
+
     @Test
     public void secondLevelVerification() {
         given()
