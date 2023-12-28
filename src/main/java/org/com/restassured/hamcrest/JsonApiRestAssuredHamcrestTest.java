@@ -21,7 +21,7 @@ public class JsonApiRestAssuredHamcrestTest {
         basePath = restAssuredConfigPath.getBasePath();
 
         ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
-        resBuilder.expectStatusCode(200);
+        //resBuilder.expectStatusCode(200);
 
         RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
         resBuilder.log(LogDetail.ALL);
@@ -69,10 +69,10 @@ public class JsonApiRestAssuredHamcrestTest {
 
     @Test
     public void fourthLevelListVerification() {
-        given()
-                .when()
-                    .get("users/4")
-                .then()
+       given()
+               .when()
+                   .get("users/4")
+               .then()
                     .statusCode(404)
                     .body("error", containsString("Usuário inexistente"));
     }

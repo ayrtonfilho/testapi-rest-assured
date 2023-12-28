@@ -1,7 +1,10 @@
 package org.com.restassured.hamcrest;
 
+import org.com.restassured.generators.UsersGeneratedTest;
 import org.com.restassured.interfaces.User;
 import org.com.restassured.utils.RestAssuredConfigPath;
+
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,7 +28,9 @@ public class HttpVerbsWithMapRestAssured {
     public void saveUserJsonTest() {
 
         Map<String, Object> params = new HashMap<>();
-        params.put("name", "Maria Joaquina");
+        String userName = UsersGeneratedTest.gerarNomeAleatorio();
+
+        params.put("name", userName);
         params.put("age", 25);
 
         given()
@@ -37,24 +42,29 @@ public class HttpVerbsWithMapRestAssured {
                 .log().all()
                 .statusCode(201)
                 .body("id", is(notNullValue()))
-                .body("name", is("Maria Joaquina"))
+                .body("name", is(userName))
                 .body("age", is(25));
     }
 
     @Test
     public void saveUserJsonObjectTest() {
-        User user = new User("Maria Joaquina", 25);
+        String userName = UsersGeneratedTest.gerarNomeAleatorio();
 
-        given()
+        User user = new User(userName, 25);
+
+        User userInsert =
+                given()
                 .contentType("application/json")
                 .body(user)
                 .when()
                     .post("users")
                 .then()
                     .log().all()
-                    .statusCode(201)
-                    .body("id", is(notNullValue()))
-                    .body("name", is("Maria Joaquina"))
-                    .body("age", is(25));
+                        .statusCode(201)
+                        .extract().body().as(User.class);
+
+        Assert.assertEquals(userName, userInsert.getName());
+        Assert.assertEquals(25, userInsert.getAge());
+        Assert.assertNotEquals(null, userInsert.getId());
     }
 }

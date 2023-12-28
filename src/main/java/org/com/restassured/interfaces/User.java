@@ -4,6 +4,7 @@ public class User {
     private String name;
     private Integer age;
     private Double salary;
+    private Long id;
 
 
     public User(String name, Integer age) {
@@ -19,8 +20,16 @@ public class User {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setAge(Integer age) {

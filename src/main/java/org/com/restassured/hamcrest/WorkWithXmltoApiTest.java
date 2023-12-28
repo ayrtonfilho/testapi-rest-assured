@@ -67,8 +67,8 @@ public class WorkWithXmltoApiTest {
                 .when()
                     .get("usersXML/")
                 .then()
-                .statusCode(200)
-                .extract().path("users.user.name.findAll{it.toString().startsWith('Maria')}");
+                    .statusCode(200)
+                    .extract().path("users.user.name.findAll{it.toString().startsWith('Maria')}");
 
         System.out.println(name);
 
@@ -76,10 +76,10 @@ public class WorkWithXmltoApiTest {
 
         ArrayList<Node> names = given()
                 .when()
-                .get("usersXML/")
+                    .get("usersXML/")
                 .then()
-                .statusCode(200)
-                .extract().path("users.user.name.findAll{it.toString().contains('n')}");
+                    .statusCode(200)
+                    .extract().path("users.user.name.findAll{it.toString().contains('n')}");
 
         System.out.println(names);
 

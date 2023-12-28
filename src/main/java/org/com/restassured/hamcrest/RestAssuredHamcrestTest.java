@@ -30,10 +30,9 @@ public class RestAssuredHamcrestTest {
                     .body(is("Ola Mundo!"))
                     .body(containsString("Mundo"))
                     .body(is(not(nullValue())))
-                .log()
-                .all();
+                    .log().all();
     }
-
+    
     @Test
     public void testAssertionsHamcrest() {
         MatcherAssert.assertThat("Olá Mundo!", Matchers.is("Olá Mundo!"));

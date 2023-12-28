@@ -22,9 +22,9 @@ public class HttpVerbsWithRestAssuredTest {
         given()
                 .contentType("application/json")
                 .body("{\"name\": \"Maria Joaquina\", \"age\": 25}")
-                .when()
+                .when() // quando
                     .post("users")
-                .then()
+                .then() // então
                     .log().all()
                     .statusCode(201)
                     .body("id", is(notNullValue()))
